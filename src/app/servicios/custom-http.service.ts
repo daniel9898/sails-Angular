@@ -28,15 +28,15 @@ export class CustomHttpService {
   }
 
   runPost(endPoint: string, object: any){
-    return this.http.post(`${this.url}${endPoint}`, object, this.getHeaders());
+    return this.http.post(`${this.url}${endPoint}`, object/*, this.getHeaders()*/);
   }
 
-  runDelete(endPoint: string, id: any, object: any){
-    return this.http.put(`${this.url}${endPoint}/${id}`, object, this.getHeaders());
+  runDelete(endPoint: string, id: any){
+    return this.http.delete(`${this.url}${endPoint}/${id}`);
   }
 
   runUpdate(endPoint: string, id: any, object: any){
-    return this.http.put(`${this.url}${endPoint}/${id}`, object, this.getHeaders());
+    return this.http.put(`${this.url}${endPoint}/${id}`, object/*, this.getHeaders()*/);
   }
 
   runPostFormData(endPoint: string, file: any){

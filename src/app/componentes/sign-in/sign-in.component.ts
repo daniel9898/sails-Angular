@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../servicios/usuario.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -15,22 +16,21 @@ export class SignInComponent implements OnInit {
     email: ''
   }
 
-  constructor(public _user: UsuarioService) {
-    this.getUsers();
-
-  }
-
-  async getUsers(){
-    
-     let users = await this._user.getAll('user').toPromise();
-     console.log(users);
-  }
+  constructor(public _user: UsuarioService,private router: Router) {}
 
   ngOnInit() {
   }
 
-  createUser(){
+  async createUser(){
+    try{
+    	console.log(this.user);
+    	let user_created = await this._user.save('user',this.user).toPromise();
+    	console.log('user_created ',user_created);
+    	this.router.navigate(['list']);
 
+    }catch(e){
+        console.log('ERROR EN createUser : ',e);
+    }
   }
 
 }
