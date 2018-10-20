@@ -27,7 +27,7 @@ export class CustomHttpService {
     return this.http.get(`${this.url}${endPoint}`,{params: filters}); 
   }
 
-  runPost(endPoint: string, object: any){
+  runPost(endPoint: string, object: any){ //test commit 
     return this.http.post(`${this.url}${endPoint}`, object/*, this.getHeaders()*/);
   }
 
