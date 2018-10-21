@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ListComponent implements OnInit {
 
   users : any;
-  constructor(public _user: UsuarioService,
+  constructor(private _user: UsuarioService,
   	          private act_router: ActivatedRoute,
 		          private router: Router) {
     this.getUsers();
@@ -25,8 +25,11 @@ export class ListComponent implements OnInit {
 
   ngOnInit() { }
 
-  editUser(user:any){
+  goToForm(user:any){
     console.log('USUARIO A EDITAR ',user);
+    localStorage.setItem('user_to_update',JSON.stringify(user));
+    localStorage.setItem('action','edit');
+    this.router.navigate(['/']);
   }
 
   async deleteUser(user:any){

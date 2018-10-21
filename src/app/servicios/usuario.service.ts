@@ -29,7 +29,7 @@ export class UsuarioService {
   }
 
   update(endPoint: string, user: any){
-    return this.miHttp.runUpdate(endPoint,user._id, user);
+    return this.miHttp.runUpdate(endPoint, user.id, user);
   }
 
   delete(endPoint: string, id: any){
