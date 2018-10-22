@@ -18,23 +18,43 @@ export class SocketService {
 
   socketOn(){
     io.socket.on('connect', data => {
-	  console.log('conectado');
-	  io.socket.post('/onConnect','',(data1,data2)=> {
-         console.log(data1,data2);
-	  })
-	});
-
-	io.socket.on('chat', data => {
-	  console.log(data);
-	});
-
-
+  	  console.log('conectado');
+  	  io.socket.post('/onConnect','',(data1,data2)=> {
+           console.log(data1,data2);
+  	  })
+	  });
   }
 
-  sendMessage(user:any){
+  socketJoin(){
+    return new Promise((resolve, reject) =>{
+        io.socket.on('chat', data => {
+          resolve(data);
+        });
+    })
+    /*return io.socket.on('chat', data => {
+      console.log(data);
+      return data;
+    */
+  }
+
+  socketBroadcast(user:any){
   	io.socket.post('/sendMessage', user ,(data1,data2)=> {
         console.log(data1,data2);
-	})
+	  })
   }
+
+  /*
+    save(collection:string, data:any){
+      return new Promise((resolve, reject) =>{
+        this.db[collection].insert(data, (err, newDocs)=> {
+          if(err){
+            console.log('ERROR ',err);
+             reject(err);
+          }
+          resolve(newDocs);
+        });
+      })
+    }
+  */
 
 }

@@ -23,20 +23,19 @@ export class SignInComponent implements OnInit {
   constructor(private _user: UsuarioService,
               private _socket: SocketService,
               private router: Router) {
-    this._socket.socketOn();
   }
 
   ngOnInit(){
-       this.action = localStorage.getItem('action');
-       if(this.action == 'edit'){
-          this.user = JSON.parse(localStorage.getItem('user_to_update'));
-       }
+    this.action = localStorage.getItem('action');
+      if(this.action == 'edit'){
+        this.user = JSON.parse(localStorage.getItem('user_to_update'));
+      }
   }
 
   save(){
     this.action != 'edit' ? this.createUser() : this.updateUser();
     localStorage.setItem('action','');
-    this._socket.sendMessage(this.user);
+    this._socket.socketBroadcast(this.user);
   }
 
   async createUser(){
